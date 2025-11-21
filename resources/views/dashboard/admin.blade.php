@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Dashboard Administrador</h1>
-<p>Bienvenido, {{ auth()->user()->name }}</p>
+    <h1>Dashboard Administrador</h1>
+    <p>Bienvenido, {{ auth()->user()->name }}</p>
 @endsection
