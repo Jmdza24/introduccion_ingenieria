@@ -38,12 +38,36 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/admin/apartamentos/{apartamento}', [App\Http\Controllers\ApartamentoController::class, 'update'])->name('apartamentos.update');
     Route::delete('/admin/apartamentos/{apartamento}', [App\Http\Controllers\ApartamentoController::class, 'destroy'])->name('apartamentos.destroy');
 
-    Route::get('/admin/residentes', [App\Http\Controllers\ResidenteController::class, 'index'])->name('residentes.index');
+    Route::get('/admin/residentes', [App\Http\Controllers\ResidenteController::class, 'index'])->name('admin.residentes.index');
     Route::get('/admin/residentes/create', [App\Http\Controllers\ResidenteController::class, 'create'])->name('residentes.create');
     Route::post('/admin/residentes', [App\Http\Controllers\ResidenteController::class, 'store'])->name('residentes.store');
     Route::get('/admin/residentes/{residente}/edit', [App\Http\Controllers\ResidenteController::class, 'edit'])->name('residentes.edit');
     Route::put('/admin/residentes/{residente}', [App\Http\Controllers\ResidenteController::class, 'update'])->name('residentes.update');
     Route::delete('/admin/residentes/{residente}', [App\Http\Controllers\ResidenteController::class, 'destroy'])->name('residentes.destroy');
+
+    // Consultas para administrador
+
+    // Historial completo
+    Route::get('/admin/visitas/historial', [App\Http\Controllers\VisitaController::class, 'historialTotal'])
+        ->name('visitas.historial');
+
+    // Consultar visitas por fecha
+    Route::get('/admin/visitas/consulta/fecha', [App\Http\Controllers\VisitaController::class, 'consultaFecha'])
+        ->name('visitas.consulta.fecha');
+    Route::post('/admin/visitas/consulta/fecha', [App\Http\Controllers\VisitaController::class, 'procesarConsultaFecha'])
+        ->name('visitas.consulta.fecha.procesar');
+
+    // Consultar visitas por apartamento
+    Route::get('/admin/visitas/consulta/apartamento', [App\Http\Controllers\VisitaController::class, 'consultaApartamento'])
+        ->name('visitas.consulta.apartamento');
+    Route::post('/admin/visitas/consulta/apartamento', [App\Http\Controllers\VisitaController::class, 'procesarConsultaApartamento'])
+        ->name('visitas.consulta.apartamento.procesar');
+
+    // Consultar visitas por visitante
+    Route::get('/admin/visitas/consulta/visitante', [App\Http\Controllers\VisitaController::class, 'consultaVisitante'])
+        ->name('visitas.consulta.visitante');
+    Route::post('/admin/visitas/consulta/visitante', [App\Http\Controllers\VisitaController::class, 'procesarConsultaVisitante'])
+        ->name('visitas.consulta.visitante.procesar');
 
 });
 
@@ -58,4 +82,36 @@ Route::middleware(['auth', 'vigilante'])->group(function () {
         return view('dashboard.vigilante');
     })->name('vigilante.dashboard');
 
+    // Módulo de Visitas - Vigilante
+
+    // 1. Buscar visitante por cédula
+    Route::get('/vigilante/visitas/buscar', [App\Http\Controllers\VisitaController::class, 'buscarVisitante'])
+        ->name('visitas.buscar');
+
+    // 2. Procesar búsqueda de visitante (nuevo o existente)
+    Route::post('/vigilante/visitas/procesar', [App\Http\Controllers\VisitaController::class, 'procesarBusqueda'])
+        ->name('visitas.procesar');
+
+    // 3. Registrar ingreso de visitante NUEVO
+    Route::post('/vigilante/visitas/ingreso/nuevo', [App\Http\Controllers\VisitaController::class, 'registrarIngresoNuevo'])
+        ->name('visitas.ingreso.nuevo');
+
+    // 4. Registrar ingreso de visitante EXISTENTE
+    Route::post('/vigilante/visitas/ingreso/existente', [App\Http\Controllers\VisitaController::class, 'registrarIngresoExistente'])
+        ->name('visitas.ingreso.existente');
+
+    // 5. Registrar salida
+    Route::get('/vigilante/visitas/salida/{id}', [App\Http\Controllers\VisitaController::class, 'registrarSalida'])
+        ->name('visitas.salida');
+
+    // 6. Ver lista de visitantes dentro actualmente
+    Route::get('/vigilante/visitas/dentro', [App\Http\Controllers\VisitaController::class, 'visitantesDentro'])
+        ->name('visitas.dentro');
+
+    // 7. Ver visitas del día
+    Route::get('/vigilante/visitas/hoy', [App\Http\Controllers\VisitaController::class, 'visitasHoy'])
+        ->name('visitas.hoy');
+
+    // 8. ver residentes
+    Route::get('/residentes', [App\Http\Controllers\ResidenteController::class, 'index'])->name('vigilante.residentes.index');
 });

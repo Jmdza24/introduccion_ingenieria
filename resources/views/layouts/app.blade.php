@@ -13,6 +13,8 @@
 
     {{-- CSS personalizado --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -22,6 +24,26 @@
     <div class="main-content">
         @yield('content')
     </div>
+
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Acceso no permitido',
+            text: "{{ session('error') }}"
+        });
+    </script>
+    @endif
+
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: "{{ session('success') }}"
+        });
+    </script>
+    @endif
 
     {{-- Scripts --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

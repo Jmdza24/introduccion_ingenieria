@@ -16,6 +16,10 @@
 
         {{-- OPCIONES SOLO PARA ADMIN --}}
         @if(auth()->user()->role === 'admin')
+
+            <li class="sidebar-title mt-2 text-center">Administración</li>
+
+            {{-- CRUD Torres --}}
             <li>
                 <a href="{{ route('torres.index') }}">
                     <i class="fa-solid fa-building"></i>
@@ -23,6 +27,7 @@
                 </a>
             </li>
 
+            {{-- CRUD Apartamentos --}}
             <li>
                 <a href="{{ route('apartamentos.index') }}">
                     <i class="fa-solid fa-door-open"></i>
@@ -30,43 +35,87 @@
                 </a>
             </li>
 
+            {{-- CRUD Residentes --}}
             <li>
-                <a href="{{ route('residentes.index') }}">
+                <a href="{{ route('admin.residentes.index') }}">
                     <i class="fa-solid fa-users"></i>
                     <span>Residentes</span>
                 </a>
             </li>
 
+            <li class="sidebar-title mt-3 text-center">Consultas de Visitas</li>
+
+            {{-- Historial completo --}}
             <li>
-                <a href="#">
-                    <i class="fa-solid fa-file-lines"></i>
-                    <span>Consultas</span>
+                <a href="{{ route('visitas.historial') }}">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Historial Completo</span>
+                </a>
+            </li>
+
+            {{-- Consultar por fecha --}}
+            <li>
+                <a href="{{ route('visitas.consulta.fecha') }}">
+                    <i class="fa-solid fa-calendar"></i>
+                    <span>Visitas por Fecha</span>
+                </a>
+            </li>
+
+            {{-- Consultar por apartamento --}}
+            <li>
+                <a href="{{ route('visitas.consulta.apartamento') }}">
+                    <i class="fa-solid fa-building-user"></i>
+                    <span>Visitas por Apartamento</span>
+                </a>
+            </li>
+
+            {{-- Consultar por visitante --}}
+            <li>
+                <a href="{{ route('visitas.consulta.visitante') }}">
+                    <i class="fa-solid fa-id-card"></i>
+                    <span>Visitas por Visitante</span>
                 </a>
             </li>
         @endif
 
+
         {{-- OPCIONES SOLO PARA VIGILANTE --}}
         @if(auth()->user()->role === 'vigilante')
+
+            <li class="sidebar-title mt-2 text-center">Visitas</li>
+
+            {{-- Registrar Ingreso --}}
             <li>
-                <a href="#">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <span>Registrar Visitas</span>
+                <a href="{{ route('visitas.buscar') }}">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>Registrar Ingreso</span>
                 </a>
             </li>
 
+            {{-- Visitantes dentro del conjunto --}}
             <li>
-                <a href="#">
-                    <i class="fa-solid fa-user-clock"></i>
-                    <span>Salida Visitas</span>
+                <a href="{{ route('visitas.dentro') }}">
+                    <i class="fa-solid fa-person-walking-arrow-right"></i>
+                    <span>Visitantes Dentro</span>
                 </a>
             </li>
 
+            {{-- Visitas del día --}}
             <li>
-                <a href="#">
-                    <i class="fa-solid fa-list"></i>
-                    <span>Consultas</span>
+                <a href="{{ route('visitas.hoy') }}">
+                    <i class="fa-solid fa-calendar-day"></i>
+                    <span>Visitas del Día</span>
                 </a>
             </li>
+
+            {{-- Consultar Residentes (solo lectura) --}}
+            <li>
+                <a href="{{ route('vigilante.residentes.index') }}">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Consultar Residentes</span>
+                </a>
+            </li>
+
         @endif
 
         {{-- LOGOUT --}}

@@ -8,9 +8,12 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <a href="{{ route('residentes.create') }}" class="btn btn-primary mb-3">
-        <i class="fa-solid fa-plus"></i> Nuevo Residente
-    </a>
+    {{-- SOLO ADMIN puede crear residentes --}}
+    @if(auth()->user()->role === 'admin')
+        <a href="{{ route('residentes.create') }}" class="btn btn-primary mb-3">
+            <i class="fa-solid fa-plus"></i> Nuevo Residente
+        </a>
+    @endif
 
     <div class="card">
         <div class="card-body">
@@ -26,7 +29,11 @@
                             <th>Celular</th>
                             <th>Apartamento</th>
                             <th>Torre</th>
-                            <th>Acciones</th>
+
+                            {{-- SOLO ADMIN ve la columna Acciones --}}
+                            @if(auth()->user()->role === 'admin')
+                                <th>Acciones</th>
+                            @endif
                         </tr>
                     </thead>
 
@@ -39,21 +46,25 @@
                                 <td>{{ $residente->celular }}</td>
                                 <td>{{ $residente->apartamento->numero }}</td>
                                 <td>{{ $residente->apartamento->torre->nombre }}</td>
-                                <td>
-                                    <a href="{{ route('residentes.edit', $residente) }}" class="btn btn-warning btn-sm">
-                                        <i class="fa-solid fa-pen"></i> Editar
-                                    </a>
 
-                                    <form action="{{ route('residentes.destroy', $residente) }}" method="POST" class="d-inline"
-                                          onsubmit="return confirm('¿Deseas eliminar este residente?')">
-                                        @csrf
-                                        @method('DELETE')
+                                {{-- SOLO ADMIN ve botones --}}
+                                @if(auth()->user()->role === 'admin')
+                                    <td>
+                                        <a href="{{ route('residentes.edit', $residente) }}" class="btn btn-warning btn-sm">
+                                            <i class="fa-solid fa-pen"></i> Editar
+                                        </a>
 
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="fa-solid fa-trash"></i> Eliminar
-                                        </button>
-                                    </form>
-                                </td>
+                                        <form action="{{ route('residentes.destroy', $residente) }}" method="POST" class="d-inline"
+                                            onsubmit="return confirm('¿Deseas eliminar este residente?')">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fa-solid fa-trash"></i> Eliminar
+                                            </button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
 

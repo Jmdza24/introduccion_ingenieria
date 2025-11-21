@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apartamento;
 use App\Models\Torre;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ApartamentoController extends Controller
 {
@@ -28,7 +29,12 @@ class ApartamentoController extends Controller
     {
         $request->validate([
             'torre_id' => 'required|exists:torres,id',
-            'numero' => 'required|unique:apartamentos,numero',
+            'numero' => [
+                'required',
+                Rule::unique('apartamentos')->where(function ($query) use ($request) {
+                    return $query->where('torre_id', $request->torre_id);
+                })
+            ],
         ]);
 
         Apartamento::create([
@@ -51,7 +57,13 @@ class ApartamentoController extends Controller
     {
         $request->validate([
             'torre_id' => 'required|exists:torres,id',
-            'numero' => 'required|unique:apartamentos,numero,' . $apartamento->id,
+            'numero' => [
+                'required',
+                Rule::unique('apartamentos')->where(function ($query) use ($request, $apartamento) {
+                    return $query->where('torre_id', $request->torre_id)
+                                ->where('id', '!=', $apartamento->id);
+                })
+            ],
         ]);
 
         $apartamento->update([

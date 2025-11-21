@@ -12,7 +12,7 @@
     <p style="color:red;">{{ session('error') }}</p>
 @endif
 
-<form action="/login" method="POST">
+<form action="{{ route('login') }}" method="POST">
     @csrf
 
     <label>Email</label>
