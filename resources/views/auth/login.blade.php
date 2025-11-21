@@ -2,31 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <title>Login - Gestor de Conjuntos</title>
 </head>
 <body>
 
-<h2>Iniciar Sesión</h2>
+<div class="login-container">
 
-@if(session('error'))
-    <p style="color:red;">{{ session('error') }}</p>
-@endif
+    <h2>Iniciar Sesión</h2>
 
-<form action="{{ route('login') }}" method="POST">
-    @csrf
+    @if(session('error'))
+        <div class="error-message">
+            {{ session('error') }}
+        </div>
+    @endif
 
-    <label>Email</label>
-    <input type="email" name="email" required>
+    <form action="{{ route('login') }}" method="POST">
+        @csrf
 
-    <br><br>
+        <label>Email</label>
+        <input type="email" name="email" required>
 
-    <label>Contraseña</label>
-    <input type="password" name="password" required>
+        <label>Contraseña</label>
+        <input type="password" name="password" required>
 
-    <br><br>
+        <button type="submit">Ingresar</button>
+    </form>
 
-    <button type="submit">Ingresar</button>
-</form>
-
+</div>
 </body>
 </html>
