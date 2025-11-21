@@ -17,21 +17,21 @@
         {{-- OPCIONES SOLO PARA ADMIN --}}
         @if(auth()->user()->role === 'admin')
             <li>
-                <a href="#">
+                <a href="{{ route('torres.index') }}">
                     <i class="fa-solid fa-building"></i>
                     <span>Torres</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{ route('apartamentos.index') }}">
                     <i class="fa-solid fa-door-open"></i>
                     <span>Apartamentos</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="{{ route('residentes.index') }}">
                     <i class="fa-solid fa-users"></i>
                     <span>Residentes</span>
                 </a>

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('apartamentos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('torre_id')->constrained('torres')->onDelete('cascade');
-            $table->string('numero')->unique();
+            $table->string('numero');
+            $table->unique(['torre_id', 'numero']);
             $table->timestamps();
         });
     }
