@@ -73,7 +73,7 @@
             <li>
                 <a href="{{ route('visitas.consulta.visitante') }}">
                     <i class="fa-solid fa-id-card"></i>
-                    <span>Visitas por Visitante</span>
+                    <span>Registro de Visitante</span>
                 </a>
             </li>
         @endif

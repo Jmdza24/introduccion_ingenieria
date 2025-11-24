@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-4">Visitantes Dentro del Conjunto</h1>
+    <section class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-4">Visitantes Dentro del Conjunto</h1>
+        <a href="{{ route('visitas.buscar') }}" class="btn btn-primary">
+            Registrar Nueva Visita
+        </a>
+    </section>
 
     <div class="card">
         <div class="card-body">

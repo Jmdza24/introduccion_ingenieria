@@ -1,7 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-4">Residentes Registrados</h1>
+    @if(auth()->user()->role === 'vigilante')
+        <section class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-4">Residentes Registrados</h1>
+            <a href="{{ route('visitas.buscar') }}" class="btn btn-primary">
+                Registrar Nueva Visita
+            </a>
+        </section>
+    @elseif(auth()->user()->role === 'admin')
+        <section class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Residentes Registrados</h1>
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-primary mb-3">
+                <i class="fa-solid fa-arrow-left"></i> Volver</a>
+        </section>
+    @endif
 
     {{-- Mensaje de éxito --}}
     @if(session('success'))

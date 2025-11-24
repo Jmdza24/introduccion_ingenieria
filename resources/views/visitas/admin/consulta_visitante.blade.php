@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-4">Consultar Visitas por Visitante</h1>
+<h1 class="mb-4">Consultar Registro de Visitantes</h1>
 
 @if(session('error'))
     <div class="alert alert-danger">{{ session('error') }}</div>

@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-4">Visitas por Apartamento</h1>
+<section class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Visitas por Apartamento</h1>
+    <a href="{{ route('visitas.consulta.apartamento') }}" class="btn btn-primary mb-3">
+        <i class="fa-solid fa-arrow-left"></i> Volver
+    </a>
+</section>
 
 @if($visitas->count() === 0)
     <p>No hay visitas registradas para este apartamento.</p>

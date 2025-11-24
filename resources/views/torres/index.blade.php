@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-4">Torres Registradas</h1>
+    <section class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Torres Registradas</h1>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-primary mb-3">
+            <i class="fa-solid fa-arrow-left"></i> Volver
+        </a>
+    </section>
 
     {{-- Mensaje de éxito --}}
     @if(session('success'))

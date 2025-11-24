@@ -48,7 +48,7 @@ class ResidenteController extends Controller
             'apartamento_id' => $request->apartamento_id,
         ]);
 
-        return redirect()->route('residentes.index')->with('success', 'Residente creado correctamente');
+        return redirect()->route('admin.residentes.index')->with('success', 'Residente creado correctamente');
     }
 
     // Formulario para editar

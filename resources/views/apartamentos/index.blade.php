@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-4">Apartamentos Registrados</h1>
+    <section class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Apartamentos Registrados</h1>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-primary mb-3">
+            <i class="fa-solid fa-arrow-left"></i> Volver
+        </a>
+    </section>
 
     {{-- Mensaje de éxito --}}
     @if(session('success'))
@@ -21,7 +26,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Número</th>
+                            <th>Apartamento</th>
                             <th>Torre</th>
                             <th>Acciones</th>
                         </tr>

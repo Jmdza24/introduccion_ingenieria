@@ -251,4 +251,13 @@ class VisitaController extends Controller
 
         return view('visitas.admin.resultado_visitante', compact('visitas', 'visitante'));
     }
+
+    public function ultimasVisitas()
+    {
+        return \App\Models\Visita::with('visitante','apartamento.torre')
+            ->orderBy('fecha_ingreso', 'desc')
+            ->orderBy('hora_ingreso', 'desc')
+            ->limit(5)
+            ->get();
+    }
 }

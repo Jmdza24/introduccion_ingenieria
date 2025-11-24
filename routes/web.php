@@ -79,7 +79,8 @@ Route::middleware(['auth', 'vigilante'])->group(function () {
 
     // Dashboard Vigilante
     Route::get('/vigilante/dashboard', function () {
-        return view('dashboard.vigilante');
+        $ultimas = app(\App\Http\Controllers\VisitaController::class)->ultimasVisitas();
+        return view('dashboard.vigilante', compact('ultimas'));
     })->name('vigilante.dashboard');
 
     // Módulo de Visitas - Vigilante

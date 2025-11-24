@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-4">Visitas de {{ $visitante->nombre }}</h1>
+<section class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-4">Visitas de {{ $visitante->nombre }}</h1>
+    <a href="{{ route('visitas.consulta.visitante') }}" class="btn btn-primary"> 
+        <i class="fa-solid fa-angle-left"></i> Volver
+    </a>
+</section>
 
 @if($visitas->count() === 0)
     <p>Este visitante no tiene registros.</p>

@@ -53,7 +53,7 @@
                     <i class="fa-solid fa-save"></i> Guardar
                 </button>
 
-                <a href="{{ route('residentes.index') }}" class="btn btn-secondary">
+                <a href="{{ route('admin.residentes.index') }}" class="btn btn-secondary">
                     <i class="fa-solid fa-arrow-left"></i> Volver
                 </a>
             </form>
